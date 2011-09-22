@@ -72,7 +72,7 @@ reasonable size.
 Based on these parameters, a combination of k=4 and k=5 provides the behavior
 that bup needs.  As such, I've implemented bloom addressing, adding and
 checking functions in C for these two values.  Because k=5 requires less space
-and gives better overall pfalse_positive perofrmance, it is preferred if a
+and gives better overall pfalse_positive performance, it is preferred if a
 table with k=5 can represent the repository.
 
 None of this tells us what max_pfalse_positive to choose.
