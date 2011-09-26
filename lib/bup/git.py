@@ -787,7 +787,7 @@ def rev_parse(committish):
 
 
 def update_ref(refname, newval, oldval):
-    """Change the commit pointed to by a branch."""
+    """Change the commit pointed to by a branch and update HEAD to point to that branch."""
     if not oldval:
         oldval = ''
     assert(refname.startswith('refs/heads/'))
@@ -795,6 +795,9 @@ def update_ref(refname, newval, oldval):
                           newval.encode('hex'), oldval.encode('hex')],
                          preexec_fn = _gitenv)
     _git_wait('git update-ref', p)
+    p = subprocess.Popen(['git', 'symbolic-ref', 'HEAD', refname],
+                         preexec_fn = _gitenv)
+    _git_wait('git symbolic-ref', p)
 
 
 def guess_repo(path=None):
